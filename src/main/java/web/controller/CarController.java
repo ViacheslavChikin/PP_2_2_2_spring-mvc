@@ -21,13 +21,9 @@ public class CarController {
     public String printWelcome(@RequestParam(value = "count", required = false) Integer count, ModelMap model) {
         List<String> messages = new ArrayList<>();
         if (count == null || count == 0 || count >= 5) {
-            for (Car car : cars) {
-                messages.add(car.toString());
-            }
+            model.addAttribute("cars", cars);
         } else {
-            for (Car car : carService.carsReturn(count)) {
-                messages.add(car.toString());
-            }
+            model.addAttribute("cars", carService.carsReturn(count));
         }
         model.addAttribute("messages", messages);
         return "cars";
