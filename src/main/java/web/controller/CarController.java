@@ -18,14 +18,12 @@ public class CarController {
     CarService carService = new CarServiceImp();
 
     @GetMapping(value = "/cars")
-    public String printWelcome(@RequestParam(value = "count", required = false) Integer count, ModelMap model) {
-        List<String> messages = new ArrayList<>();
+    public String printCars(@RequestParam(value = "count", required = false) Integer count, ModelMap model) {
         if (count == null || count == 0 || count >= 5) {
             model.addAttribute("cars", cars);
         } else {
             model.addAttribute("cars", carService.carsReturn(count));
         }
-        model.addAttribute("messages", messages);
         return "cars";
     }
 }
